@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" class="ion-margin-top">
+    <ion-item>
+      <ion-input required placeholder="Correo" #user name="user"  type="email" [(ngModel)]="loginInfo.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required placeholder="Contraseña" #password  clearOnEdit="false" name="password" type="password" [(ngModel)]="loginInfo.password"></ion-input>
+      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
+    </ion-item>
+
+    <ion-row class="ion-margin-top">
+      <ion-col col-12>
+        <ion-button size="small" expand="block" (click)="emailLogin(form)">Iniciar sesión</ion-button>
+        <ion-button size="small" expand="block" (click)="googleLogin()">
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-button>
+
+
+        <span style="font-size: 0.8rem;" routerLink="/register">¿No tienes una cuenta? Registrate aquí</span>
+
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

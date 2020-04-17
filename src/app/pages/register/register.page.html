@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-input required placeholder="Correo" #user name="user" [(ngModel)]="registerInfo.email"  type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required placeholder="Contraseña" #password  [(ngModel)]="registerInfo.password" name="password" type="password"></ion-input>
+      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-input required placeholder="Confirmar contraseña" #confirmPassword  [(ngModel)]="registerInfo.confirm_password" name="confirm_password" type="password"></ion-input>
+      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
+    </ion-item>
+    <ion-row>
+      <ion-col col-12>
+        <ion-button size="small" expand="block" (click)="registerEmail(form)">
+          <ion-text>Registrar cuenta</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+
+  </form>
+</ion-content>
