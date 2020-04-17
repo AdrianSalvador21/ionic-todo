@@ -19,13 +19,11 @@ export class TodoService {
   async getUserId() {
     await this.storage.get('uid').then((val) => {
       this.uid = val;
-      console.log(val);
       return this.uid;
     });
   }
 
   getTodos() {
-    console.log(this.uid);
     this.todosCollection = this.db.collection<TaskInterface>('todos', ref => ref.where('uid', '==', this.uid));
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(

@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
     });
     await loading.present();
     this.storage.get('uid').then(value => {
-      console.log(value);
       if (value) {
         this.nav.navigateRoot('/home');
       }

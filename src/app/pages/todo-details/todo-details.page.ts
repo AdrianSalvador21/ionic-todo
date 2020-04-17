@@ -35,7 +35,6 @@ export class TodoDetailsPage implements OnInit {
     } else {
       this.storage.get('clientLogin').then((val) => {
         this.todo.uid = (val) ? val : '';
-        console.log(this.todo);
       });
     }
   }
