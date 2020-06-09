@@ -10,8 +10,7 @@ export class SecurityService {
   constructor(public authentication: AngularFireAuth) { }
 
   loginGoogle() {
-    console.log('login');
-    return this.authentication.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return this.doAuth(new firebase.auth.GoogleAuthProvider());
   }
 
   loginEmail(user) {
@@ -24,6 +23,17 @@ export class SecurityService {
 
   registerUser(user) {
     return this.authentication.createUserWithEmailAndPassword(user.email, user.password);
+  }
+
+  doAuth(provider: any) {
+    if (!( window as any).cordova) {
+      return this.authentication.signInWithPopup(provider);
+    } else {
+      this.authentication.signInWithRedirect(provider)
+        .then(() => {
+          return this.authentication.getRedirectResult();
+        });
+    }
   }
 
 }

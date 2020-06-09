@@ -33,7 +33,7 @@ export class TodoDetailsPage implements OnInit {
     if (this.todoId) {
       this.loadTodo();
     } else {
-      this.storage.get('clientLogin').then((val) => {
+      this.storage.get('uid').then((val) => {
         this.todo.uid = (val) ? val : '';
       });
     }
@@ -61,13 +61,14 @@ export class TodoDetailsPage implements OnInit {
       // update
       this.todoService.updateTodo(this.todo, this.todoId).then(() => {
         loading.dismiss();
-        this.nav.navigateForward('/');
+        this.nav.navigateRoot('/home');
       });
     } else {
       // create new
+      console.log(this.todo);
       this.todoService.addTodo(this.todo).then(() => {
         loading.dismiss();
-        this.nav.navigateForward('/');
+        this.nav.navigateRoot('/home');
       });
     }
   }

@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar mode="ios">
     <ion-title>
-      Mis Tareas
+      My Work
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-list>
 
     <ion-list-header mode="ios" class="ion-margin-bottom">
-      <ion-label>Tareas Pendientes</ion-label>
+      <h5>Tareas Pendientes</h5>
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let todo of todos">
@@ -25,13 +25,13 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button size="small" routerLink="/details" routerDirection="forward">
+    <ion-fab-button routerLink="/details" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" color="danger">
-    <ion-fab-button size="small" routerDirection="forward" color="danger" (click)="logout()">
+    <ion-fab-button routerDirection="forward" color="danger" (click)="logout()">
       <ion-icon name="exit-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

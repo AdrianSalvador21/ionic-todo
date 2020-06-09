@@ -1,28 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
     <ion-title>
-     Detalles
+     Details
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list lines="full">
-
     <ion-item *ngIf="todo">
-      <ion-input required type="text" placeholder="Tarea" [(ngModel)]="todo.task"></ion-input>
+      <ion-input required type="text" placeholder="Task" [(ngModel)]="todo.task"></ion-input>
     </ion-item>
-
     <ion-item *ngIf="todo">
-      <ion-input required type="number" placeholder="Prioridad" [(ngModel)]="todo.priority"></ion-input>
+      <ion-input required type="number" placeholder="Priority" [(ngModel)]="todo.priority"></ion-input>
     </ion-item>
-
   </ion-list>
-
   <ion-button expand="full" (click)="saveTodo()">Guardar</ion-button>
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="todoId" (click)="deleteTodo()">
     <ion-fab-button routerLink="/home" routerDirection="forward" color="danger">

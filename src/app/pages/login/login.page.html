@@ -1,30 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-title>Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form #form="ngForm" class="ion-margin-top">
+
+<ion-content class="ion-justify-content-center">
+  <form #form="ngForm">
+
     <ion-item>
-      <ion-input required placeholder="Correo" #user name="user"  type="email" [(ngModel)]="loginInfo.email"></ion-input>
+      <ion-input placeholder="Email" required type="text" name="user" [(ngModel)]="loginInfo.email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input required placeholder="Contraseña" #password  clearOnEdit="false" name="password" type="password" [(ngModel)]="loginInfo.password"></ion-input>
-      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
+      <ion-input placeholder="Password" required type="text" name="password" [(ngModel)]="loginInfo.password"></ion-input>
     </ion-item>
 
-    <ion-row class="ion-margin-top">
-      <ion-col col-12>
-        <ion-button size="small" expand="block" (click)="emailLogin(form)">Iniciar sesión</ion-button>
-        <ion-button size="small" expand="block" (click)="googleLogin()">
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" (click)="emailLogin(form)">Sign In</ion-button>
+        <ion-button expand="block" (click)="googleLogin()">
           <ion-icon name="logo-google"></ion-icon>
         </ion-button>
-
-
-        <span style="font-size: 0.8rem;" routerLink="/register">¿No tienes una cuenta? Registrate aquí</span>
-
+        <a class="small-text" routerLink="/register">¿No tienes una cuenta? Registrate</a>
       </ion-col>
     </ion-row>
 
