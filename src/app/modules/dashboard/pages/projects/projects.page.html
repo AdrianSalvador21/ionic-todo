@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-icon mode="md" name="search-outline" class="cursor-pointer" style="font-size: 1.3rem; height: 1.3rem; width: 1.3rem; color: #506ac5; margin-right: 0.7rem; font-weight: 500; margin-left: 0.2rem;"></ion-icon>
+    </ion-buttons>
+    <ion-title mode="md">Proyectos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-card class="basic-card mt-3" routerLink="/dashboard-menu-tabs/project-detail" *ngFor="let todo of todos, let i = index" [ngClass]="{'mb-2r': i === 4}">
+    <ion-card-content class="ft-13">
+      <ion-text color="medium" class="ft-12">#PA-001</ion-text>
+      <div class="report-header">
+        <p>{{todo.task}}</p>
+        <!-- <p>$36,700</p> -->
+        <p></p>
+      </div>
+      <p>Descripción para proyecto prueba</p>
+
+      <!-- <div class="report-detail">
+        <div class="report-notification-container">5</div>
+        <p class="m-0 report-error">Posibles errores de factura</p>
+      </div> -->
+      <hr />
+      <div class="report-footer">
+        <p>Administrador: <span class="black-text">Adrian Salvador</span></p>
+        <p>Sprint: <span>Activo</span></p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 3.5rem; !important;">
+    <ion-fab-button routerLink="/dashboard-menu-tabs/new-project" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" color="danger" style="margin-bottom: 3.5rem; !important;">
+    <ion-fab-button routerDirection="forward" color="danger" (click)="logout()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

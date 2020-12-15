@@ -1,30 +1,39 @@
-<ion-header mode="ios">
-  <ion-toolbar mode="ios">
-    <ion-title>Log In</ion-title>
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title slot="start" style="padding-left: 2px;">
+      <img style="width: 4.5rem;" alt="logo" src="assets/img/logo2.svg"/>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
 
-<ion-content class="ion-justify-content-center">
-  <form #form="ngForm">
+  <div class="row login-container container display-center">
+    <div class="col-12" style="padding: 0 20px;">
+      <div class="display-center">
+        <h3 class="w-100">Inicio de sesión</h3>
+      </div>
+    </div>
 
-    <ion-item>
-      <ion-input placeholder="Email" required type="text" name="user" [(ngModel)]="loginInfo.email"></ion-input>
-    </ion-item>
+    <div class="col-12" style="padding: 0 20px;">
+      <div>
+        <form #form="ngForm">
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Usuario</mat-label>
+            <input matInput name="email" placeholder="Usuario" [(ngModel)]="loginInfo.email" required autocomplete="off">
+          </mat-form-field>
 
-    <ion-item>
-      <ion-input placeholder="Password" required type="text" name="password" [(ngModel)]="loginInfo.password"></ion-input>
-    </ion-item>
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Contraseña</mat-label>
+            <input matInput name="passwoord" type="password" placeholder="Contraseña" [(ngModel)]="loginInfo.password" required autocomplete="off">
+          </mat-form-field>
 
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block" (click)="emailLogin(form)">Sign In</ion-button>
-        <ion-button expand="block" (click)="googleLogin()">
-          <ion-icon name="logo-google"></ion-icon>
-        </ion-button>
-        <a class="small-text" routerLink="/register">¿No tienes una cuenta? Registrate</a>
-      </ion-col>
-    </ion-row>
+          <button class="login-button" (click)="emailLogin(form)">Entrar</button>
+        </form>
 
-  </form>
+        <p class="w-100 forgot-label" routerLink="/register">¿No tienes una cuenta? Registrate</p>
+      </div>
+    </div>
+  </div>
 </ion-content>
+

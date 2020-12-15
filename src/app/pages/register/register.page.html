@@ -1,36 +1,45 @@
-<ion-header mode="ios">
-  <ion-toolbar mode="ios">
-    <ion-buttons slot="start">
-      <ion-back-button text=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>Sign In</ion-title>
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title slot="start" style="padding-left: 2px;">
+      <img style="width: 4.5rem;" alt="logo" src="assets/img/logo2.svg"/>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm">
-    <ion-item>
-      <ion-input required placeholder="Email" #user name="user" [(ngModel)]="registerInfo.email"  type="email"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-input required placeholder="Password" #password  [(ngModel)]="registerInfo.password" name="password" type="password"></ion-input>
-      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
-    </ion-item>
+  <div class="row login-container container display-center">
+    <div class="col-12" style="padding: 0 20px;">
+      <div class="display-center">
+        <h3 class="w-100">Registrate</h3>
+      </div>
+    </div>
 
-    <ion-item>
-      <ion-input required placeholder="Confirm Password" #confirmPassword  [(ngModel)]="registerInfo.confirm_password" name="confirm_password" type="password"></ion-input>
-      <ion-icon  item-content name="eye-off" class="passwordIcon"></ion-icon>
-    </ion-item>
-    <ion-row>
-      <ion-col col-12>
-        <ion-button expand="block" (click)="registerEmail(form)">
-          <ion-text>Sign In</ion-text>
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <div class="col-12" style="padding: 0 20px;">
+      <div>
+        <form #form="ngForm">
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Usuario</mat-label>
+            <input matInput name="email" placeholder="Usuario" [(ngModel)]="registerInfo.email" required autocomplete="off">
+          </mat-form-field>
 
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" name="passwoord" placeholder="Contraseña" [(ngModel)]="registerInfo.password" required autocomplete="off">
+          </mat-form-field>
 
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Confirmar contraseña</mat-label>
+            <input matInput type="password" name="confirmPasswoord" placeholder="Confirmar contraseña" [(ngModel)]="registerInfo.confirm_password" required autocomplete="off">
+          </mat-form-field>
 
-  </form>
+          <button class="login-button" (click)="registerEmail(form)">Registrarse</button>
+        </form>
+
+        <p class="w-100 forgot-label" routerLink="/login">¿Ya tienes una cuenta? Inicia sesión</p>
+      </div>
+    </div>
+  </div>
 </ion-content>
+
+

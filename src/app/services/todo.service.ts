@@ -11,8 +11,8 @@ import {Storage} from '@ionic/storage';
 export class TodoService {
 
   public uid = '';
-  private todosCollection: AngularFirestoreCollection<TaskInterface>;
-  private todos: Observable<TaskInterface[]>;
+  private todosCollection: AngularFirestoreCollection<any>;
+  private todos: Observable<any[]>;
 
   constructor(public db: AngularFirestore, public storage: Storage) {}
 
@@ -24,7 +24,7 @@ export class TodoService {
   }
 
   getTodos() {
-    this.todosCollection = this.db.collection<TaskInterface>('todos', ref => ref.where('uid', '==', this.uid));
+    this.todosCollection = this.db.collection<any>('todos', ref => ref.where('uid', '==', this.uid));
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(
         actions => {
@@ -39,14 +39,14 @@ export class TodoService {
   }
 
   getTodo(id: string) {
-    return this.todosCollection.doc<TaskInterface>(id).valueChanges();
+    return this.todosCollection.doc<any>(id).valueChanges();
   }
 
-  updateTodo(todo: TaskInterface, id: string) {
+  updateTodo(todo: any, id: string) {
     return this.todosCollection.doc(id).update(todo);
   }
 
-  addTodo(todo: TaskInterface) {
+  addTodo(todo: any) {
     return this.todosCollection.add(todo);
   }
 

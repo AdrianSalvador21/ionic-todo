@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: 'AIzaSyAwN3yyDWIdS3EP_0Pz-AcgTJjVq6oi738',
-    authDomain: 'ionic-todo-ee2ad.firebaseapp.com',
-    databaseURL: 'https://ionic-todo-ee2ad.firebaseio.com',
-    projectId: 'ionic-todo-ee2ad',
-    storageBucket: 'ionic-todo-ee2ad.appspot.com',
-    messagingSenderId: '744503575267',
-    appId: '1:744503575267:web:d518c845c59fec161ebbd6',
-    measurementId: 'G-72BZP7JSWJ'
+    apiKey: 'AIzaSyAMZSzO8-5XyeIKiQhu-hCWgjxBNlnWpEw',
+    authDomain: 'arel-app.firebaseapp.com',
+    databaseURL: 'https://arel-app.firebaseio.com',
+    projectId: 'arel-app',
+    storageBucket: 'arel-app.appspot.com',
+    messagingSenderId: '96988444166',
+    appId: '1:96988444166:web:e0752e1427ec7d0780f587',
+    measurementId: 'G-Z1WGSLZZYR'
   }
 };
 

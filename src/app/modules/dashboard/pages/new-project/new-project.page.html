@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard-menu-tabs/projects" color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{headerTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <!-- <ion-list lines="full">
+    <ion-item *ngIf="todo">
+      <ion-input required type="text" placeholder="Task" [(ngModel)]="todo.task"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="todo">
+      <ion-input required type="number" placeholder="Priority" [(ngModel)]="todo.priority"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="saveTodo()">Guardar</ion-button> -->
+
+
+
+  <div class="nr-container" *ngIf="todo">
+    <h2 class="nr-title w-100">Nuevo proyecto</h2>
+    <h4 class="nr-subtitle">Llena los campos para crearlo</h4>
+    <div class="w-100 mt-2r">
+      <form class="example-form mt-2r">
+        <mat-form-field class="w-100">
+          <mat-label>Titulo del proyecto</mat-label>
+          <input matInput placeholder="Titulo del proyecto" [(ngModel)]="todo.task" name="tasknam" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <mat-label>Prioridad</mat-label>
+          <input matInput  placeholder="Prioridad" [(ngModel)]="todo.priority" name="amount" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <mat-label>Descripción</mat-label>
+          <input matInput placeholder="Titulo del proyecto" [(ngModel)]="todo.description" name="description" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <mat-label>Identificador</mat-label>
+          <input matInput placeholder="id" name="projectId" [(ngModel)]="todo.id" required>
+        </mat-form-field>
+
+      </form>
+    </div>
+
+    <div class="button-container display-center mt-0" style="margin-bottom: 5rem;">
+      <ion-button class="new-report-button primary" (click)="saveTodo()">Aceptar</ion-button>
+      <ion-button class="new-report-button secondary mr-0" routerLink="/dashboard-menu-tabs/projects">Cancelar</ion-button>
+    </div>
+
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="todoId" (click)="deleteTodo()">
+    <ion-fab-button routerLink="/home" routerDirection="forward" color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

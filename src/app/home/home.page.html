@@ -1,18 +1,19 @@
-<ion-header [translucent]="true" mode="ios">
-  <ion-toolbar mode="ios">
-    <ion-title>
-      My Work
-    </ion-title>
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button menu="first" color="primary"></ion-menu-button> -->
+    </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-button (click)="mostrarMenu()" color="primary">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title>Mis tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
-
-    <ion-list-header mode="ios" class="ion-margin-bottom">
-      <h5>Tareas Pendientes</h5>
-    </ion-list-header>
-
+<ion-content [fullscreen]="true" color="light">
+  <ion-list style="margin-top: 1.5rem; padding-bottom: 1.3rem;">
     <ion-item-sliding *ngFor="let todo of todos">
       <ion-item lines="inset" [routerLink]="['/details', todo.id]">
         <ion-label>

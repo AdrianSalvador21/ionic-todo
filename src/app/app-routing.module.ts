@@ -19,6 +19,22 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'dashboard-menu-tabs',
+    loadChildren: () => import('./modules/dashboard/pages/dashboard-menu-tabs/dashboard-menu-tabs.module').then( m => m.DashboardMenuTabsPageModule)
+  },
+  {
+    path: 'projects',
+    loadChildren: () => import('./modules/dashboard/pages/projects/projects.module').then( m => m.ProjectsPageModule)
+  },
+  {
+    path: 'project-details',
+    loadChildren: () => import('./modules/dashboard/pages/project-details/project-details.module').then( m => m.ProjectDetailsPageModule)
+  },
+  {
+    path: 'new-project',
+    loadChildren: () => import('./modules/dashboard/pages/new-project/new-project.module').then( m => m.NewProjectPageModule)
   }
 ];
 

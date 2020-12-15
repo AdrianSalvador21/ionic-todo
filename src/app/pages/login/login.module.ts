@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import {MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [LoginPage]
 })

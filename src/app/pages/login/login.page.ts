@@ -30,7 +30,8 @@ export class LoginPage implements OnInit {
     await loading.present();
     this.storage.get('uid').then(value => {
       if (value) {
-        this.nav.navigateRoot('/home');
+        // this.nav.navigateRoot('/home');
+        this.nav.navigateRoot('/dashboard-menu-tabs');
       }
       loading.dismiss();
     });
@@ -44,7 +45,7 @@ export class LoginPage implements OnInit {
     this.securityService.loginGoogle().then(res => {
       this.storage.set('uid', res.user.uid).then(() => {
         loading.dismiss();
-        this.nav.navigateRoot('/home');
+        this.nav.navigateRoot('/dashboard-menu-tabs');
       });
     });
   }
@@ -58,7 +59,7 @@ export class LoginPage implements OnInit {
       this.securityService.loginEmail(this.loginInfo).then(res => {
         this.storage.set('uid', res.user.uid).then(() => {
           loading.dismiss();
-          this.nav.navigateRoot('/home');
+          this.nav.navigateRoot('/dashboard-menu-tabs');
         });
       });
     }
