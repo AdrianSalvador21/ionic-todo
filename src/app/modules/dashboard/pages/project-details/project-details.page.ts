@@ -3,7 +3,8 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {HttpClient} from '@angular/common/http';
-
+import {Storage} from '@ionic/storage';
+import {TodoService} from '../../../../services/todo.service';
 
 export interface Fruit {
   name: string;
@@ -15,7 +16,7 @@ export interface Fruit {
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
-
+  public todos = [];
   showCategoryDetail = false;
   visible = true;
   selectable = true;
@@ -26,6 +27,26 @@ export class ProjectDetailsPage implements OnInit {
     {name: 'Fecha'},
     {name: 'Categoría'}
   ];
+
+  constructor(private loadingController: LoadingController, public todoService: TodoService,
+              public storage: Storage) { }
+
+  async ngOnInit() {
+  }
+
+  async ionViewWillEnter() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...'
+    });
+    await loading.present();
+    this.todoService.getProjectId().then(() => {
+      this.todoService.getTodos().subscribe(response => {
+        this.todos = response;
+        console.log(this.todos);
+        loading.dismiss();
+      });
+    });
+  }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -50,9 +71,23 @@ export class ProjectDetailsPage implements OnInit {
     }
   }
 
-  constructor() { }
+  setProgressLabel(priority) {
+    switch (priority) {
+      case '1':
+        return 'Por hacer';
+      case '2':
+        return 'En progreso';
+      case '3':
+        return 'Completada';
+    }
+  }
 
-  ngOnInit() {
+  setPriorityColor(priority) {
+    return {
+      green: priority === '1',
+      orange: priority === '2',
+      red: priority === '3'
+    };
   }
 
 }

@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-card class="basic-card mt-3">
+  <ion-card class="basic-card mt-3" style="margin-bottom: 4rem;">
     <div style="padding-left: 16px;padding-right: 16px;padding-top: 13px;">
       <div class="report-detail-title">
         <div>
@@ -38,7 +38,7 @@
     </div>
 
 
-    <div style="margin-bottom: 4rem;">
+    <div>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="ToDo">
           <div class="report-chips-container">
@@ -52,19 +52,19 @@
 
             </mat-chip-list>
           </div>
-          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of [1,1,1,1,1]">
+          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of todos">
             <div class="report-expense-container w-100">
               <div class="detail">
                 <div style="width: 100% !important;">
                   <div class="display-center" style="margin-top: 0; align-items: flex-start !important; justify-content: flex-start !important;">
                     <ion-icon mode="md" name="chevron-forward-outline" class="cursor-pointer" style="font-size: 1.1rem; height: 1.1rem; width: 1.1rem; color: #506ac5; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
                     <div class="w-100">
-                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">Agregar tooltip para aprobación de montos</h3>
+                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">{{todo.description}}</h3>
 
                       <div style="display: flex; justify-content: space-between;">
                         <p class="mt-1 task-label display-center">
-                          <span>Task-224</span>
-                          <ion-icon mode="md" name="arrow-up-outline" class="cursor-pointer ml-2" style="font-size: 1.1rem; margin-bottom: 1px; height: 1rem; width: 1rem; color: #d67723; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+                          <span>Task-{{todo.taskNumber}}</span>
+                          <ion-icon mode="md" [ngClass]="setPriorityColor(todo.priority)" name="arrow-up-outline" class="cursor-pointer ml-2" style="font-size: 1.1rem; margin-bottom: 1px; height: 1rem; width: 1rem; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
                         </p>
                         <div class="progress-user-container">
                           <ion-avatar class="menu-img">
@@ -72,7 +72,7 @@
                           </ion-avatar>
 
                           <div>
-                            <p class="mb-0 ">En progreso</p>
+                            <p class="mb-0">{{setProgressLabel(todo.progress)}}</p>
                           </div>
                         </div>
                       </div>
@@ -99,11 +99,13 @@
               </div> -->
             </div>
           </div>
+
+          <div class="report-detail-container" *ngIf="todos.length === 0">
+            <div class="report-expense-container w-100">
+              <p class="mb-0 text-muted" style="text-align: center;">Aún no tienes tareas agregadas</p>
+            </div>
+          </div>
         </mat-tab>
-
-
-
-
 
 
         <mat-tab label="WIP">Content 2</mat-tab>
@@ -112,4 +114,10 @@
     </div>
 
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 3.5rem; !important;">
+    <ion-fab-button routerLink="/dashboard-menu-tabs/new-task" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

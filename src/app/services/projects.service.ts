@@ -8,10 +8,9 @@ import {Storage} from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class TodoService {
+export class ProjectsService {
 
   public uid = '';
-  public projectId = '';
   private todosCollection: AngularFirestoreCollection<any>;
   private todos: Observable<any[]>;
 
@@ -24,23 +23,21 @@ export class TodoService {
     });
   }
 
-
-  async getProjectId() {
-    await this.storage.get('projectId').then((val) => {
-      this.projectId = val;
-      return this.projectId;
-    });
-  }
-
   getTodos() {
-    this.todosCollection = this.db.collection<any>('todos', ref => ref.where('projectId', '==', this.projectId));
+    this.todosCollection = this.db.collection<any>('projects', ref => ref.where('uid', '==', this.uid));
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(
         actions => {
           return actions.map(a => {
             const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return {id, ...data};
+            const projectId = a.payload.doc.id;
+
+            console.log(projectId);
+            console.log(data);
+
+            console.log({projectId, ...data});
+            return {projectId, ...data};
+
           });
         }
       ));

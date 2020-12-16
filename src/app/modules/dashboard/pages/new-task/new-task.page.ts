@@ -1,30 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskInterface} from '../../../../models/task.interface';
 import {ActivatedRoute} from '@angular/router';
 import {LoadingController, NavController} from '@ionic/angular';
-import {TodoService} from '../../../../services/todo.service';
-import {Storage} from '@ionic/storage';
 import {ProjectsService} from '../../../../services/projects.service';
+import {Storage} from '@ionic/storage';
+import {TodoService} from '../../../../services/todo.service';
 
 @Component({
-  selector: 'app-new-project',
-  templateUrl: './new-project.page.html',
-  styleUrls: ['./new-project.page.scss'],
+  selector: 'app-new-task',
+  templateUrl: './new-task.page.html',
+  styleUrls: ['./new-task.page.scss'],
 })
-export class NewProjectPage implements OnInit {
+export class NewTaskPage implements OnInit {
   todo: any = {
-    task: '',
-    uid: '',
     description: '',
-    taskCounter: 0,
-    id: ''
+    projectId: '',
+    priority: '1',
+    progress: '1',
+    taskNumber: 0
   };
   todoId = null;
-  public headerTitle = 'Nuevo proyecto';
+  projectData = null;
+  public headerTitle = 'Nueva tarea';
 
   constructor(private route: ActivatedRoute,
               private nav: NavController,
-              private todoService: ProjectsService,
+              private todoService: TodoService,
+              private projectService: ProjectsService,
               public storage: Storage,
               private loadingController: LoadingController
   ) {
@@ -34,11 +35,18 @@ export class NewProjectPage implements OnInit {
   ngOnInit() {
     this.todoId = this.route.snapshot.params.id;
     if (this.todoId) {
-      this.headerTitle = 'Editar proyecto';
+      this.headerTitle = 'Editar tarea';
       this.loadTodo();
     } else {
-      this.storage.get('uid').then((val) => {
-        this.todo.uid = (val) ? val : '';
+      this.storage.get('projectId').then((val) => {
+        this.todo.projectId = (val) ? val : '';
+        console.log(this.todo);
+        this.projectService.getTodo(this.todo.projectId).subscribe((projectData) => {
+          console.log(projectData);
+          this.projectData = projectData;
+          this.todo.taskNumber = Number(this.projectData.taskCounter) + 1;
+          this.projectData.taskCounter  = Number(this.projectData.taskCounter) + 1;
+        });
       });
     }
   }
@@ -65,14 +73,16 @@ export class NewProjectPage implements OnInit {
       // update
       this.todoService.updateTodo(this.todo, this.todoId).then(() => {
         loading.dismiss();
-        this.nav.navigateRoot('/dashboard-menu-tabs/projects');
+        this.nav.navigateRoot('/dashboard-menu-tabs/project-detail');
       });
     } else {
       // create new
       console.log(this.todo);
-      this.todoService.addTodo(this.todo).then(() => {
-        loading.dismiss();
-        this.nav.navigateRoot('/dashboard-menu-tabs/projects');
+      this.projectService.updateTodo(this.projectData, this.todo.projectId).then(() => {
+        this.todoService.addTodo(this.todo).then(() => {
+          loading.dismiss();
+          this.nav.navigateRoot('/dashboard-menu-tabs/project-detail');
+        });
       });
     }
   }
@@ -83,7 +93,8 @@ export class NewProjectPage implements OnInit {
     });
     this.todoService.removeTodo(this.todoId).then(() => {
       loading.dismiss();
-      this.nav.navigateForward('/dashboard-menu-tabs/projects');
+      this.nav.navigateForward('/dashboard-menu-tabs/project-detail');
     });
   }
+
 }

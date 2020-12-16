@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border" mode="md">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard-menu-tabs/projects" color="primary"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard-menu-tabs/project-detail" color="primary"></ion-back-button>
     </ion-buttons>
 
     <ion-title>{{headerTitle}}</ion-title>
@@ -19,28 +19,24 @@
   </ion-list>
   <ion-button expand="full" (click)="saveTodo()">Guardar</ion-button> -->
 
-
-
   <div class="nr-container" *ngIf="todo">
-    <h2 class="nr-title w-100">Nuevo proyecto</h2>
-    <h4 class="nr-subtitle">Llena los campos para crearlo</h4>
+    <h2 class="nr-title w-100">Nueva tarea</h2>
+    <h4 class="nr-subtitle">Llena los campos para crearla</h4>
     <div class="w-100 mt-2r">
       <form class="example-form mt-2r">
         <mat-form-field class="w-100">
-          <mat-label>Titulo del proyecto</mat-label>
-          <input matInput placeholder="Titulo del proyecto" [(ngModel)]="todo.task" name="tasknam" required>
-        </mat-form-field>
-
-        <mat-form-field class="w-100">
           <mat-label>Descripción</mat-label>
-          <input matInput placeholder="Titulo del proyecto" [(ngModel)]="todo.description" name="description" required>
+          <input matInput placeholder="Titulo del proyecto" [(ngModel)]="todo.description" name="tasknam" required>
         </mat-form-field>
 
         <mat-form-field class="w-100">
-          <mat-label>Identificador</mat-label>
-          <input matInput placeholder="id" name="projectId" [(ngModel)]="todo.id" required>
+          <mat-label>Prioridad</mat-label>
+          <mat-select name="priority" [(ngModel)]="todo.priority" required>
+            <mat-option value="3">Alta</mat-option>
+            <mat-option value="2">Media</mat-option>
+            <mat-option value="1">Baja</mat-option>
+          </mat-select>
         </mat-form-field>
-
       </form>
     </div>
 

@@ -4,26 +4,33 @@ import {TodoService} from '../../../../services/todo.service';
 import {SecurityService} from '../../../../services/security.service';
 import {LoadingController, NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import {ProjectsService} from '../../../../services/projects.service';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.page.html',
   styleUrls: ['./projects.page.scss'],
 })
+
 export class ProjectsPage implements OnInit {
-  public todos: TaskInterface[] = [];
+  public todos: any[] = [];
   constructor(
-    public todoService: TodoService,
+    public todoService: ProjectsService,
     public securityService: SecurityService,
     private nav: NavController,
     private loadingController: LoadingController,
     public storage: Storage,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...'
+    });
+    await loading.present();
     this.todoService.getUserId().then(() => {
       this.todoService.getTodos().subscribe(response => {
         this.todos = response;
+        loading.dismiss();
       });
     });
   }
@@ -38,6 +45,13 @@ export class ProjectsPage implements OnInit {
         this.nav.navigateRoot('/login');
         loading.dismiss();
       });
+    });
+  }
+
+  goToDetail(project) {
+    console.log(project);
+    this.storage.set('projectId', project.projectId).then(() => {
+      this.nav.navigateForward('/dashboard-menu-tabs/project-detail');
     });
   }
 }

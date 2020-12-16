@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../../../../modules/dashboard/pages/new-project/new-project.module').then( m => m.NewProjectPageModule)
       },
       {
+        path: 'new-task',
+        loadChildren: () => import('../../../../modules/dashboard/pages/new-task/new-task.module').then( m => m.NewTaskPageModule)
+      },
+      {
         path: '**',
         redirectTo: 'projects',
       },

@@ -95,7 +95,7 @@
 
   .report-expense-container {
     background-color: white;
-    padding: 20px 16px;
+    padding: 17px 16px;
     // margin-bottom: 1rem;
 
     .detail {
@@ -187,4 +187,16 @@ ion-fab-button {
 .task-label {
   font-size: 13px;
   font-weight: 100;
+}
+
+.green {
+  color: #00a482 !important;
+}
+
+.orange {
+  color: #d67723 !important;
+}
+
+.red {
+  color: red !important;
 }

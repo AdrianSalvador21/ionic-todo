@@ -8,15 +8,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <ion-card class="basic-card mt-3" routerLink="/dashboard-menu-tabs/project-detail" *ngFor="let todo of todos, let i = index" [ngClass]="{'mb-2r': i === 4}">
+  <ion-card class="basic-card mt-3" (click)="goToDetail(todo)" *ngFor="let todo of todos, let i = index" [ngClass]="{'mb-2r': i === 4}">
     <ion-card-content class="ft-13">
-      <ion-text color="medium" class="ft-12">#PA-001</ion-text>
+      <ion-text color="medium" class="ft-12">#{{todo.id}}</ion-text>
       <div class="report-header">
         <p>{{todo.task}}</p>
         <!-- <p>$36,700</p> -->
         <p></p>
       </div>
-      <p>Descripción para proyecto prueba</p>
+      <p>{{todo.description}}</p>
 
       <!-- <div class="report-detail">
         <div class="report-notification-container">5</div>
