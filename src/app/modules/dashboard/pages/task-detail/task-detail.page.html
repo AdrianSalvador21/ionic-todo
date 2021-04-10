@@ -1,0 +1,110 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="closeModal()" defaultHref="/dashboard-menu-tabs/project-detail" color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-icon mode="md" name="search-outline" class="cursor-pointer" style="font-size: 1.3rem; height: 1.3rem; width: 1.3rem; color: #506ac5; margin-right: 0.7rem; font-weight: 500; margin-left: 0.2rem;"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="expense-detail-title">
+    <div>
+      <p class="mt-1 task-label" style="display: flex; align-items: center;">
+        <span>Task-{{data.taskNumber}}</span>
+        <ion-icon mode="md" [ngClass]="setPriorityColor(data.priority)" name="arrow-up-outline" class="cursor-pointer ml-2" style="font-size: 1.1rem; margin-bottom: 1px; height: 1rem; width: 1rem; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+      </p>
+      <h3 style="margin-top: 2px !important;">{{data.title}}</h3>
+    </div>
+
+    <mat-icon style="font-size: 1.5rem;height: 1.5rem; width: 1.5rem; font-weight: 300; color: black;">more_vert</mat-icon>
+  </div>
+
+  <p class="expense-detail-title" style="font-size: 13px">{{data?.createdDate.toDate() | date: 'dd/MM/yyyy'}} - {{data?.createdDate.toDate() | date: 'shortTime'}}</p>
+  <p class="expense-detail-title" style="font-size: 13px">{{data.description}}</p>
+
+  <p class="expense-detail-title" style="font-size: 13px; margin-top: 1rem; margin-bottom: 0;">Estado</p>
+  <div class="expense-detail-title" style="padding-top: 0 !important; margin-top: 0 !important;">
+    <div>
+      <ion-select (ngModelChange)="updateTask()" [(ngModel)]="data.progress" name="approver" placeholder="Aprobador" interface="action-sheet" mode="md" style="border-bottom: 1px solid #1e2642; font-size: 14px; width: 12rem; text-align: start !important; padding: 10px 0 7px 2px; color: #1e2642;">
+        <ion-select-option class="my-custom-interface" *ngFor="let progressOption of progressTypes;" [value]="progressOption.value" style="font-size: 14px !important;">
+          <div>
+            <ion-icon mode="md" name="search-outline" class="cursor-pointer" style="font-size: 1.3rem; height: 1.3rem; width: 1.3rem; color: #506ac5; margin-right: 0.5rem; font-weight: 500; margin-left: 0.2rem;"></ion-icon>
+            <span>{{progressOption.label}}</span>
+          </div>
+        </ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+
+  <p class="expense-detail-title" style="font-size: 13px; margin-top: 1rem; margin-bottom: 4px;">Adjunto</p>
+
+  <ion-row style="padding: 0 12px;">
+    <ion-col size="6" *ngFor="let image of data.imagesUrl">
+      <ion-card style="margin-top: 0 !important;">
+        <img style="min-height: 6rem" class="preview-img" [src]="image | imageSanitizer" alt="img2" />
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <div class="mt-1">
+    <div class="mb-5">
+      <div style="padding-top: 0 !important;">
+        <div class="expense-detail-card">
+          <h4 class="main-title" style="color: black !important; margin-bottom: 25px !important;">Comentarios</h4>
+        </div>
+
+        <!-- <div>
+          <h4>Importe total</h4>
+          <p class="mb-0">ABC</p>
+        </div> -->
+
+        <div class="messages-box" *ngIf="commentsData.length !== 0">
+          <div class="user-message" *ngFor="let comment of commentsData">
+            <div>
+              <ion-avatar class="message-img"><ion-img src="/assets/img/user.png"></ion-img></ion-avatar>
+            </div>
+            <div>
+              <div class="user-info">
+                <p class="mb-0 user-name">Adrián Salvador</p>
+                <span class="text-muted">{{comment?.createdDate.toDate() | date: 'dd/MM/yyyy'}} - {{comment?.createdDate.toDate() | date: 'shortTime'}}</span>
+              </div>
+              <p class="message">{{comment.message}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-detail-container" style="margin-bottom: 6rem;" *ngIf="commentsData.length === 0">
+          <div class="report-expense-container w-100">
+            <p class="mb-0 text-muted" style="text-align: center; font-size: 13px">Sin comentarios</p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="container message-box-container animate__animated animate__fadeInDown">
+    <form>
+      <div class="chat-input-container">
+        <div class="row w-100">
+          <div class="col-11">
+            <input autocomplete="off" #newMessage autofocus="" class="form-control-custom chat-input" name="texto" placeholder="Enviar mensaje" type="text">
+          </div>
+          <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding: 0 !important;">
+            <div class="custom-button">
+              <!-- <i class="far fa-angle-right" style="font-weight: 800; color: white;"></i> -->
+              <mat-icon (click)="addMessage(newMessage)" style="font-size: 1rem; height: 1rem; width: 1rem; font-weight: 600; color: white;">keyboard_arrow_right</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

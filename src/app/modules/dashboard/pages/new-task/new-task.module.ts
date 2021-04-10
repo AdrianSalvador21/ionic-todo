@@ -8,6 +8,7 @@ import { NewTaskPageRoutingModule } from './new-task-routing.module';
 
 import { NewTaskPage } from './new-task.page';
 import {MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {PipesModule} from '../../../../core/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/mate
     NewTaskPageRoutingModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    PipesModule
   ],
   declarations: [NewTaskPage]
 })

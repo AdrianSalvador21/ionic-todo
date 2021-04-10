@@ -28,6 +28,7 @@ export class TodoService {
   async getProjectId() {
     await this.storage.get('projectId').then((val) => {
       this.projectId = val;
+      console.log(this.projectId);
       return this.projectId;
     });
   }

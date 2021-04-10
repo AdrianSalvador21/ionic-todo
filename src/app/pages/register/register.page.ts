@@ -12,7 +12,8 @@ export class RegisterPage implements OnInit {
   public registerInfo: any  = {
     email: '',
     password: '',
-    confirm_password: ''
+    confirm_password: '',
+    name: ''
   };
   constructor(public securityService: SecurityService,
               private nav: NavController,

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">personal-kanban</string>
+    <string name="title_activity_main">personal-kanban</string>
+    <string name="package_name">silva.salvador.adrian.personalkanban</string>
+    <string name="custom_url_scheme">silva.salvador.adrian.personalkanban</string>
+</resources>

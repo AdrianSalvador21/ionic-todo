@@ -15,6 +15,8 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {IonicStorageModule} from '@ionic/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
+import {PipesModule} from './core/pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,8 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireAuthModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PipesModule
   ],
   providers: [
     StatusBar,

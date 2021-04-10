@@ -3,6 +3,13 @@ import {SecurityService} from '../../services/security.service';
 import {LoadingController, NavController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import {NgForm} from '@angular/forms';
+import {
+  Plugins,
+  Capacitor, StatusBarStyle
+} from '@capacitor/core';
+const { StatusBar, Filesystem } = Plugins;
+
+if (Capacitor.isPluginAvailable('StatusBar')) { StatusBar.show(); }
 
 @Component({
   selector: 'app-login',
@@ -21,6 +28,14 @@ export class LoginPage implements OnInit {
     public storage: Storage,
     private loadingController: LoadingController
     ) {
+
+    StatusBar.setStyle({
+      style: StatusBarStyle.Light
+    });
+
+    StatusBar.setBackgroundColor({
+      color: '#f0f1f8'
+    });
   }
 
   async ngOnInit() {
@@ -61,6 +76,8 @@ export class LoginPage implements OnInit {
           loading.dismiss();
           this.nav.navigateRoot('/dashboard-menu-tabs');
         });
+      }).catch(() => {
+        loading.dismiss();
       });
     }
   }

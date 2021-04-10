@@ -46,3 +46,28 @@ ion-list {
     margin-right: 1rem;
   }
 }
+
+
+.button-container-fixed {
+  position: fixed;
+  bottom: 3.5rem;
+  left: 0;
+  width: 100vw;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  margin: 0!important;
+  height: 72px;
+  z-index: 100;
+  background-color: rgba(255,255,255,.98);
+  text-align: center;
+  box-shadow: 0 -2px 3px 0 rgba(201,201,201,.2);
+}
+
+.upload-button {
+  background-color: #1d2542;
+  color: white;
+  width: 100%;
+  min-height: 2.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}

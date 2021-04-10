@@ -6,6 +6,14 @@ import {LoadingController, NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {ProjectsService} from '../../../../services/projects.service';
 
+import {
+  Plugins,
+  Capacitor, StatusBarStyle
+} from '@capacitor/core';
+const { StatusBar, Filesystem } = Plugins;
+
+if (Capacitor.isPluginAvailable('StatusBar')) { StatusBar.show(); }
+
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.page.html',
@@ -20,7 +28,15 @@ export class ProjectsPage implements OnInit {
     private nav: NavController,
     private loadingController: LoadingController,
     public storage: Storage,
-  ) {}
+  ) {
+    StatusBar.setStyle({
+      style: StatusBarStyle.Light
+    });
+
+    StatusBar.setBackgroundColor({
+      color: '#f0f1f8'
+    });
+  }
 
   async ngOnInit() {
     const loading = await this.loadingController.create({

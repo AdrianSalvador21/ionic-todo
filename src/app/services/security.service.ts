@@ -25,6 +25,10 @@ export class SecurityService {
     return this.authentication.createUserWithEmailAndPassword(user.email, user.password);
   }
 
+  sendVefiricationCode() {
+    // return this.authentication.auth.send
+  }
+
   doAuth(provider: any) {
     if (!( window as any).cordova) {
       return this.authentication.signInWithPopup(provider);

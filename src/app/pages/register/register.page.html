@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border" mode="md">
   <ion-toolbar>
     <ion-title slot="start" style="padding-left: 2px;">
-      <img style="width: 4.5rem;" alt="logo" src="assets/img/logo2.svg"/>
+      <img style="width: 4.5rem; margin-left: -15px; margin-top: 1rem;" alt="logo" src="assets/img/logo2.svg"/>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,8 +19,13 @@
       <div>
         <form #form="ngForm">
           <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
-            <mat-label>Usuario</mat-label>
-            <input matInput name="email" placeholder="Usuario" [(ngModel)]="registerInfo.email" required autocomplete="off">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput name="email" placeholder="Correo" [(ngModel)]="registerInfo.name" required autocomplete="off">
+          </mat-form-field>
+
+          <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">
+            <mat-label>Correo</mat-label>
+            <input matInput name="email" placeholder="Correo" [(ngModel)]="registerInfo.email" required autocomplete="off">
           </mat-form-field>
 
           <mat-form-field class="w-100" appearance="fill" style="margin-bottom: 0 !important;">

@@ -13,8 +13,8 @@
     <div style="padding-left: 16px;padding-right: 16px;padding-top: 13px;">
       <div class="report-detail-title">
         <div>
-          <h3>Título</h3>
-          <p>Descripción</p>
+          <h3>{{projectData.task}}</h3>
+          <p style="margin-top: 5px">{{projectData.description}}</p>
         </div>
         <mat-icon style="font-size: 1.5rem;height: 1.5rem; width: 1.5rem; font-weight: 300; color: black;">more_vert</mat-icon>
       </div>
@@ -25,15 +25,9 @@
       </div>
 
       <div class="report-detail-list-item">
-        <p>Sprint</p>
-        <p>15</p>
+        <p>Fecha de creación</p>
+        <p>{{projectData?.createdDate?.toDate() | date: 'dd/MM/yyyy'}}</p>
       </div>
-
-      <div class="report-detail-list-item">
-        <p>Tiempo restante</p>
-        <p>5 días</p>
-      </div>
-
       <hr style="margin-top: 1rem; margin-bottom: 1rem;" class="basic-hr"/>
     </div>
 
@@ -52,14 +46,14 @@
 
             </mat-chip-list>
           </div>
-          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of todos">
+          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of todoArray" (click)="todoDetail(todo)">
             <div class="report-expense-container w-100">
               <div class="detail">
                 <div style="width: 100% !important;">
                   <div class="display-center" style="margin-top: 0; align-items: flex-start !important; justify-content: flex-start !important;">
                     <ion-icon mode="md" name="chevron-forward-outline" class="cursor-pointer" style="font-size: 1.1rem; height: 1.1rem; width: 1.1rem; color: #506ac5; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
                     <div class="w-100">
-                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">{{todo.description}}</h3>
+                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">{{todo.title}}</h3>
 
                       <div style="display: flex; justify-content: space-between;">
                         <p class="mt-1 task-label display-center">
@@ -79,37 +73,127 @@
                     </div>
 
                   </div>
-                  <!-- <p class="amount mt-1">Descripción</p> -->
                 </div>
-
-                <!-- <div class="progress-user-container">
-                  <ion-avatar class="menu-img">
-                    <ion-img src="/assets/img/user.png"></ion-img>
-                  </ion-avatar>
-
-                  <div>
-                    <p class="mb-0 ">En progreso</p>
-                  </div>
-                </div> -->
               </div>
-              <!-- <hr class="basic-hr" style="margin-bottom: 0; margin-top: 10px;"/> -->
-              <!-- <p class="mb-0 mt-1">21 Enero 2020</p> -->
-              <!-- <div class="actions-container display-center" style="justify-content: flex-end; !important;">
-                <ion-icon name="alert-circle-outline" class="cursor-pointer" style="font-size: 1.3rem; height: 1.3rem; width: 1.3rem; margin-right: 0.2rem; font-weight: 500; margin-left: 0.2rem;"></ion-icon>
-              </div> -->
             </div>
           </div>
 
-          <div class="report-detail-container" *ngIf="todos.length === 0">
+          <div class="report-detail-container" *ngIf="todoArray.length === 0">
             <div class="report-expense-container w-100">
-              <p class="mb-0 text-muted" style="text-align: center;">Aún no tienes tareas agregadas</p>
+              <p class="mb-0 text-muted" style="text-align: center;">Aún no tienes tareas por hacer</p>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="WIP">
+          <div class="report-chips-container">
+            <p>Ordenar por:</p>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(fruit)">
+                {{fruit.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+
+            </mat-chip-list>
+          </div>
+          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of wipArray" (click)="todoDetail(todo)">
+            <div class="report-expense-container w-100">
+              <div class="detail">
+                <div style="width: 100% !important;">
+                  <div class="display-center" style="margin-top: 0; align-items: flex-start !important; justify-content: flex-start !important;">
+                    <ion-icon mode="md" name="chevron-forward-outline" class="cursor-pointer" style="font-size: 1.1rem; height: 1.1rem; width: 1.1rem; color: #506ac5; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+                    <div class="w-100">
+                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">{{todo.title}}</h3>
+
+                      <div style="display: flex; justify-content: space-between;">
+                        <p class="mt-1 task-label display-center">
+                          <span>Task-{{todo.taskNumber}}</span>
+                          <ion-icon mode="md" [ngClass]="setPriorityColor(todo.priority)" name="arrow-up-outline" class="cursor-pointer ml-2" style="font-size: 1.1rem; margin-bottom: 1px; height: 1rem; width: 1rem; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+                        </p>
+                        <div class="progress-user-container">
+                          <ion-avatar class="menu-img">
+                            <ion-img src="/assets/img/user.png"></ion-img>
+                          </ion-avatar>
+
+                          <div>
+                            <p class="mb-0">{{setProgressLabel(todo.progress)}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="report-detail-container" *ngIf="wipArray.length === 0">
+            <div class="report-expense-container w-100">
+              <p class="mb-0 text-muted" style="text-align: center;">Aún no tienes tareas en progreso</p>
             </div>
           </div>
         </mat-tab>
 
 
-        <mat-tab label="WIP">Content 2</mat-tab>
-        <mat-tab label="Complete">Content 3</mat-tab>
+
+
+
+
+
+
+
+        <mat-tab label="Complete">
+          <div class="report-chips-container">
+            <p>Ordenar por:</p>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(fruit)">
+                {{fruit.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+
+            </mat-chip-list>
+          </div>
+          <div class="report-detail-container" style="padding-bottom: 0;" *ngFor="let todo of completeArray" (click)="todoDetail(todo)">
+            <div class="report-expense-container w-100">
+              <div class="detail">
+                <div style="width: 100% !important;">
+                  <div class="display-center" style="margin-top: 0; align-items: flex-start !important; justify-content: flex-start !important;">
+                    <ion-icon mode="md" name="chevron-forward-outline" class="cursor-pointer" style="font-size: 1.1rem; height: 1.1rem; width: 1.1rem; color: #506ac5; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+                    <div class="w-100">
+                      <h3 class="mt-0 mb-2" style="font-size: 14px; line-height: normal;">{{todo.title}}</h3>
+
+                      <div style="display: flex; justify-content: space-between;">
+                        <p class="mt-1 task-label display-center">
+                          <span>Task-{{todo.taskNumber}}</span>
+                          <ion-icon mode="md" [ngClass]="setPriorityColor(todo.priority)" name="arrow-up-outline" class="cursor-pointer ml-2" style="font-size: 1.1rem; margin-bottom: 1px; height: 1rem; width: 1rem; margin-right: 0.4rem; font-weight: 500;"></ion-icon>
+                        </p>
+                        <div class="progress-user-container">
+                          <ion-avatar class="menu-img">
+                            <ion-img src="/assets/img/user.png"></ion-img>
+                          </ion-avatar>
+
+                          <div>
+                            <p class="mb-0">{{setProgressLabel(todo.progress)}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="report-detail-container" *ngIf="completeArray.length === 0">
+            <div class="report-expense-container w-100">
+              <p class="mb-0 text-muted" style="text-align: center;">Aún no tienes tareas completadas</p>
+            </div>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
 

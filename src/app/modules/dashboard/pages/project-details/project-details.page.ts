@@ -5,6 +5,8 @@ import {LoadingController, ModalController, NavController} from '@ionic/angular'
 import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {TodoService} from '../../../../services/todo.service';
+import {ProjectsService} from '../../../../services/projects.service';
+import {TaskDetailPage} from '../task-detail/task-detail.page';
 
 export interface Fruit {
   name: string;
@@ -17,6 +19,10 @@ export interface Fruit {
 })
 export class ProjectDetailsPage implements OnInit {
   public todos = [];
+  public todoArray: any[] = [];
+  public wipArray: any[] = [];
+  public completeArray: any[] = [];
+  public projectData: any = {};
   showCategoryDetail = false;
   visible = true;
   selectable = true;
@@ -28,7 +34,7 @@ export class ProjectDetailsPage implements OnInit {
     {name: 'Categoría'}
   ];
 
-  constructor(private loadingController: LoadingController, public todoService: TodoService,
+  constructor(private loadingController: LoadingController, public todoService: TodoService, private modalCtrl: ModalController, public projectService: ProjectsService,
               public storage: Storage) { }
 
   async ngOnInit() {
@@ -39,10 +45,18 @@ export class ProjectDetailsPage implements OnInit {
       message: 'Cargando...'
     });
     await loading.present();
-    this.todoService.getProjectId().then(() => {
+    this.todoService.getProjectId().then((projectId) => {
+      console.log(this.todoService.projectId);
+      this.projectService.getTodo(this.todoService.projectId).subscribe((data) => {
+        console.log(data);
+        this.projectData = data;
+      });
       this.todoService.getTodos().subscribe(response => {
         this.todos = response;
         console.log(this.todos);
+        this.todoArray = this.todos.filter(todo => todo.progress === '1');
+        this.wipArray = this.todos.filter(todo => todo.progress === '2');
+        this.completeArray = this.todos.filter(todo => todo.progress === '3');
         loading.dismiss();
       });
     });
@@ -88,6 +102,20 @@ export class ProjectDetailsPage implements OnInit {
       orange: priority === '2',
       red: priority === '3'
     };
+  }
+
+  async todoDetail(todo) {
+    console.log(todo);
+    this.storage.set('taskId', todo.id).then(async () => {
+      const modal = await this.modalCtrl.create({
+        component: TaskDetailPage,
+        componentProps: {
+          data: todo
+        }
+      });
+
+      await modal.present();
+    });
   }
 
 }

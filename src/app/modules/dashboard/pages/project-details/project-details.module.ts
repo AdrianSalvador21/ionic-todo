@@ -8,6 +8,8 @@ import { ProjectDetailsPageRoutingModule } from './project-details-routing.modul
 
 import { ProjectDetailsPage } from './project-details.page';
 import {MatChipsModule, MatIconModule, MatTabsModule} from '@angular/material';
+import {TaskDetailPage} from '../task-detail/task-detail.page';
+import {TaskDetailPageModule} from '../task-detail/task-detail.module';
 
 @NgModule({
   imports: [
@@ -17,8 +19,12 @@ import {MatChipsModule, MatIconModule, MatTabsModule} from '@angular/material';
     ProjectDetailsPageRoutingModule,
     MatIconModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    TaskDetailPageModule
   ],
-  declarations: [ProjectDetailsPage]
+  declarations: [ProjectDetailsPage],
+  entryComponents: [
+    TaskDetailPage
+  ]
 })
 export class ProjectDetailsPageModule {}

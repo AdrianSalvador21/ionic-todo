@@ -15,6 +15,7 @@ export class NewProjectPage implements OnInit {
   todo: any = {
     task: '',
     uid: '',
+    createdDate: '',
     description: '',
     taskCounter: 0,
     id: ''
@@ -68,6 +69,7 @@ export class NewProjectPage implements OnInit {
         this.nav.navigateRoot('/dashboard-menu-tabs/projects');
       });
     } else {
+      this.todo.createdDate = new Date();
       // create new
       console.log(this.todo);
       this.todoService.addTodo(this.todo).then(() => {
